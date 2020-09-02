@@ -4,6 +4,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 
 import lombok.Builder;
 import lombok.Data;
@@ -23,16 +24,20 @@ public class Client {
 	@Column
 	private String lastName;
 	
+	@OneToOne
+	private Account account;
+	
 	
 	
 	public Client() {
 		
 	}
 
-	public Client(Long id, String firstName, String lastName) {
+	public Client(Long id, String firstName, String lastName,Account account) {
 		this.id = id;
 		this.firstName = firstName;
 		this.lastName = lastName;
+		this.account =  account;
 	}
 
 	public Client(String firstName, String lastName) {
