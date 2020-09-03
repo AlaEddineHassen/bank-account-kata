@@ -67,7 +67,7 @@ public class AccountServiceTest {
 
 		// Then
 		assertNotNull(foundAccount);
-		assertEquals(updatedAccount.getBalance(), foundAccount.getBalance());
+		assertEquals(updatedAccount.getBalance().doubleValue(), foundAccount.getBalance().doubleValue());
 
 	}
 
