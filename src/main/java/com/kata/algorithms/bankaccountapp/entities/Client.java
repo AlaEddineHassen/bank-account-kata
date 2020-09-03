@@ -23,29 +23,19 @@ public class Client {
 
 	@Column
 	private String lastName;
-	
+
 	@OneToOne
 	private Account account;
-	
-	
-	
+
 	public Client() {
-		
+
 	}
 
-	public Client(Long id, String firstName, String lastName,Account account) {
+	public Client(Long id, String firstName, String lastName, Account account) {
 		this.id = id;
 		this.firstName = firstName;
 		this.lastName = lastName;
-		this.account =  account;
+		this.account = account;
 	}
-
-	public Client(String firstName, String lastName) {
-		super();
-		this.firstName = firstName;
-		this.lastName = lastName;
-	}
-	
-	
 
 }
