@@ -25,22 +25,22 @@ public class ClientOperationsController {
 	StatementService statementService;
 
 	public Account depositMoney(Account account, BigDecimal amount) {
-		account.setBalance(account.getBalance().add(amount));
-		Statement newStatement = Statement.builder().account(account).amount(amount).balance(account.getBalance())
-				.type(OperationType.CREDIT).statementDate(Date.valueOf(LocalDate.now())).build();
-		statementService.createStatement(newStatement);
-		accountService.createOrUpdateAccount(account);
-
-		return account;
+		
+		return saveStatementAndUpdateAccount(account, OperationType.CREDIT, amount);
 	}
 
 	public Account withdrawMoney(Account account, BigDecimal amount) {
-		account.setBalance(account.getBalance().subtract(amount));
+
+		return saveStatementAndUpdateAccount(account, OperationType.DEBIT, amount);
+	}
+
+	private Account saveStatementAndUpdateAccount(Account account, OperationType type, BigDecimal amount) {
+		account.setBalance(type.equals(OperationType.CREDIT) ? account.getBalance().add(amount)
+				: account.getBalance().subtract(amount));
 		Statement newStatement = Statement.builder().account(account).amount(amount).balance(account.getBalance())
 				.type(OperationType.DEBIT).statementDate(Date.valueOf(LocalDate.now())).build();
 		statementService.createStatement(newStatement);
 		accountService.createOrUpdateAccount(account);
-
 		return account;
 	}
 
