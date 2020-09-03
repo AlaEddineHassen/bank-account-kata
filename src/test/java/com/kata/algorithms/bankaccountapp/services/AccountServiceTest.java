@@ -2,6 +2,9 @@ package com.kata.algorithms.bankaccountapp.services;
 
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
+
+import java.math.BigDecimal;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -22,7 +25,7 @@ public class AccountServiceTest {
 		Client client = Client.builder().firstName("Aladin").lastName("Hassan").build();
 		clientService.createOrUpdateClient(client);
 
-		Account account = Account.builder().label("AHCASHACC").balance(Double.valueOf(0)).client(client).build();
+		Account account = Account.builder().label("AHCASHACC").balance(BigDecimal.valueOf(0)).client(client).build();
 
 		// When
 		Account createdAccount = accountService.createOrUpdateAccount(account);
@@ -39,7 +42,7 @@ public class AccountServiceTest {
 		Client client = Client.builder().firstName("Aladin").lastName("Hassan").build();
 		clientService.createOrUpdateClient(client);
 
-		Account account = Account.builder().label("AHCASHACC").balance(Double.valueOf(0)).client(client).build();
+		Account account = Account.builder().label("AHCASHACC").balance(BigDecimal.valueOf(0)).client(client).build();
 		 accountService.createOrUpdateAccount(account);
 		// When
 		 Account foundAccount = accountService.findAccountById(account.getId()).orElse(null);
@@ -54,11 +57,11 @@ public class AccountServiceTest {
 		Client client = Client.builder().firstName("Aladin").lastName("Hassan").build();
 		clientService.createOrUpdateClient(client);
 
-		Account account = Account.builder().label("AHCASHACC").balance(Double.valueOf(0)).client(client).build();
+		Account account = Account.builder().label("AHCASHACC").balance(BigDecimal.valueOf(0)).client(client).build();
 		Account createdAccount = accountService.createOrUpdateAccount(account);
 		// When
 
-		createdAccount.setBalance(Double.valueOf(1000000));
+		createdAccount.setBalance(BigDecimal.valueOf(1000000));
 		Account updatedAccount = accountService.createOrUpdateAccount(createdAccount);
 		Account foundAccount = accountService.findAccountById(updatedAccount.getId()).orElse(null);
 

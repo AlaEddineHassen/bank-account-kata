@@ -4,6 +4,7 @@ package com.kata.algorithms.bankaccountapp.entities;
 
 
 
+import java.math.BigDecimal;
 import java.sql.Date;
 
 import javax.persistence.Column;
@@ -28,7 +29,7 @@ public class Statement {
 	private Long id;
 
 	@Column
-	private Double amount;
+	private BigDecimal amount;
 
 	@Column
 	@Enumerated
@@ -38,7 +39,7 @@ public class Statement {
 	private Date statementDate;
 
 	@Column
-	private Double balance;
+	private BigDecimal balance;
 
 	@ManyToOne(optional = false)
 	private Account account;
@@ -46,7 +47,7 @@ public class Statement {
 	public Statement() {
 	}
 
-	public Statement(Long id, Double amount, OperationType type, Date statementDate, Double balance, Account account) {
+	public Statement(Long id, BigDecimal amount, OperationType type, Date statementDate, BigDecimal balance, Account account) {
 		this.id = id;
 		this.amount = amount;
 		this.type = type;

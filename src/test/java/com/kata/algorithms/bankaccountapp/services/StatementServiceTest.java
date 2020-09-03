@@ -3,6 +3,7 @@ package com.kata.algorithms.bankaccountapp.services;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.math.BigDecimal;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.util.List;
@@ -36,7 +37,7 @@ public class StatementServiceTest {
 
 		client = Client.builder().firstName("Aladin").lastName("Hassan").build();
 		clientService.createOrUpdateClient(client);
-		account = Account.builder().label("AHCASHACC").balance(Double.valueOf(0)).client(client).build();
+		account = Account.builder().label("AHCASHACC").balance(BigDecimal.valueOf(0)).client(client).build();
 		accountService.createOrUpdateAccount(account);
 	}
 
@@ -44,7 +45,7 @@ public class StatementServiceTest {
 	@DirtiesContext
 	public void createStatementTest() {
 
-		Statement statement = Statement.builder().amount(Double.valueOf(1000)).balance(Double.valueOf(1000))
+		Statement statement = Statement.builder().amount(BigDecimal.valueOf(1000)).balance(BigDecimal.valueOf(1000))
 				.statementDate(Date.valueOf(LocalDate.now())).type(OperationType.CREDIT).account(account).build();
 		statementService.createStatement(statement);
 
@@ -55,10 +56,10 @@ public class StatementServiceTest {
 	@DirtiesContext
 	public void findAllStatementTest() {
 		// Given
-		Statement creditStatement = Statement.builder().amount(Double.valueOf(1000)).balance(Double.valueOf(1000))
+		Statement creditStatement = Statement.builder().amount(BigDecimal.valueOf(1000)).balance(BigDecimal.valueOf(1000))
 				.statementDate(Date.valueOf(LocalDate.now())).type(OperationType.CREDIT).account(account).build();
 		statementService.createStatement(creditStatement);
-		Statement debitStatement = Statement.builder().amount(Double.valueOf(1000)).balance(Double.valueOf(1000))
+		Statement debitStatement = Statement.builder().amount(BigDecimal.valueOf(1000)).balance(BigDecimal.valueOf(1000))
 				.statementDate(Date.valueOf(LocalDate.now())).type(OperationType.DEBIT).account(account).build();
 		statementService.createStatement(debitStatement);
 
@@ -74,10 +75,10 @@ public class StatementServiceTest {
 	@DirtiesContext
 	public void findStatementByAccount() {
 		// Given
-		Statement creditStatement = Statement.builder().amount(Double.valueOf(1000)).balance(Double.valueOf(1000))
+		Statement creditStatement = Statement.builder().amount(BigDecimal.valueOf(1000)).balance(BigDecimal.valueOf(1000))
 				.statementDate(Date.valueOf(LocalDate.now())).type(OperationType.CREDIT).account(account).build();
 		statementService.createStatement(creditStatement);
-		Statement debitStatement = Statement.builder().amount(Double.valueOf(1000)).balance(Double.valueOf(1000))
+		Statement debitStatement = Statement.builder().amount(BigDecimal.valueOf(1000)).balance(BigDecimal.valueOf(1000))
 				.statementDate(Date.valueOf(LocalDate.now())).type(OperationType.DEBIT).account(account).build();
 		statementService.createStatement(debitStatement);
 
@@ -93,15 +94,15 @@ public class StatementServiceTest {
 	@DirtiesContext
 	public void findStatementByAccountByType() {
 		// Given
-		Statement creditStatement = Statement.builder().amount(Double.valueOf(1000)).balance(Double.valueOf(1000))
+		Statement creditStatement = Statement.builder().amount(BigDecimal.valueOf(1000)).balance(BigDecimal.valueOf(1000))
 				.statementDate(Date.valueOf(LocalDate.now())).type(OperationType.CREDIT).account(account).build();
 		statementService.createStatement(creditStatement);
 
-		Statement sndCreditStatement = Statement.builder().amount(Double.valueOf(1000)).balance(Double.valueOf(1000))
+		Statement sndCreditStatement = Statement.builder().amount(BigDecimal.valueOf(1000)).balance(BigDecimal.valueOf(1000))
 				.statementDate(Date.valueOf(LocalDate.now())).type(OperationType.CREDIT).account(account).build();
 		statementService.createStatement(sndCreditStatement);
 		
-		Statement debitStatement = Statement.builder().amount(Double.valueOf(1000)).balance(Double.valueOf(1000))
+		Statement debitStatement = Statement.builder().amount(BigDecimal.valueOf(1000)).balance(BigDecimal.valueOf(1000))
 				.statementDate(Date.valueOf(LocalDate.now())).type(OperationType.DEBIT).account(account).build();
 		statementService.createStatement(debitStatement);
 

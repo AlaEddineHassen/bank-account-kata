@@ -1,5 +1,6 @@
 package com.kata.algorithms.bankaccountapp.entities;
 
+import java.math.BigDecimal;
 import java.util.Currency;
 import java.util.List;
 import java.util.Locale;
@@ -26,7 +27,7 @@ public class Account {
 	private String label;
 
 	@Column
-	private Double balance;
+	private BigDecimal balance;
 
 	@OneToOne(optional = false)
 	private Client client;
@@ -37,7 +38,7 @@ public class Account {
 	@OneToMany(mappedBy = "account")
 	private List<Statement> statements;
 
-	public Account(Long id, String label, Double balance, Client client, Currency currency,
+	public Account(Long id, String label, BigDecimal balance, Client client, Currency currency,
 			List<Statement> statements) {
 		super();
 		this.id = id;
