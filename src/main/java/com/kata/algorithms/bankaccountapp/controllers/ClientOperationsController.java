@@ -28,19 +28,19 @@ public class ClientOperationsController {
 	@Autowired
 	StatementService statementService;
 
-	public Account depositMoney(Account account, BigDecimal amount) {
+	public Account depositMoney(final Account account, final BigDecimal amount) {
 
 		return saveStatementAndUpdateAccount(account, OperationType.CREDIT, amount);
 	}
 
-	public Account withdrawMoney(Account account, BigDecimal amount) {
+	public Account withdrawMoney(final Account account, final BigDecimal amount) {
 
 		validate(account, amount, OperationType.DEBIT);
 
 		return saveStatementAndUpdateAccount(account, OperationType.DEBIT, amount);
 	}
 
-	private void validate(Account account, BigDecimal amount, OperationType operationType) {
+	private void validate(final Account account, final BigDecimal amount, final OperationType operationType) {
 
 		if (operationType.equals(OperationType.DEBIT) && account.getBalance().subtract(amount).doubleValue() < 0) {
 			throw new NotEnoughBalanceException(account, operationType);
@@ -48,7 +48,7 @@ public class ClientOperationsController {
 
 	}
 
-	private Account saveStatementAndUpdateAccount(Account account, OperationType type, BigDecimal amount) {
+	private Account saveStatementAndUpdateAccount(final Account account, final OperationType type, final BigDecimal amount) {
 		account.setBalance(type.equals(OperationType.CREDIT) ? account.getBalance().add(amount)
 				: account.getBalance().subtract(amount));
 		Statement newStatement = Statement.builder().account(account).amount(amount).balance(account.getBalance())
@@ -58,7 +58,7 @@ public class ClientOperationsController {
 		return account;
 	}
 
-	public List<String> getOperationsHistory(Account account) {
+	public List<String> getOperationsHistory(final Account account) {
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMM uuuu");
 		List<Statement> allStatmentByAccount = statementService.findStatementsByAccount(account);
 		return allStatmentByAccount.stream()
